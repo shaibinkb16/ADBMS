@@ -1,0 +1,99 @@
+Amrutha> use comp;
+switched to db comp
+comp> db.createCollection('website');
+{ ok: 1 }
+comp> db.website.insertOne({roll:1,name:'harsh',amount:1000,url:'www.yahoo.com'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('662206797a2fbcceb39f990a')
+}
+comp> db.website.insertOne({roll:2,name:'jitesh',amount:2000,url:'wwww.yahoo.com'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66220aea5ebe22b9039f990b')
+}
+comp> db.website.insertOne({roll:3,name:'rina',amount:3000,url:'wwww.google.com'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66220aff5ebe22b9039f990c')
+}
+comp> db.website.insertOne({roll:4,name:'ash',amount:4000,url:'wwww.gmail.com'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66220b235ebe22b9039f990d')
+}
+comp> db.website.insertOne({roll:5,name:'ash',amount:1000,url:'wwww.pvg.com'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66220b485ebe22b9039f990e')
+}
+
+
+comp> db.website.aggregate({$group:{_id:'$name',total:{$sum:'$amount'}}});
+[
+  { _id: 'ash', total: 5000 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'rina', total: 3000 },
+  { _id: 'harsh', total: 1000 }
+]
+
+
+comp> db.website.aggregate({$group:{_id:'$name',total:{$avg:'$amount'}}});
+[
+  { _id: 'ash', total: 2500 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'harsh', total: 1000 },
+  { _id: 'rina', total: 3000 }
+]
+
+comp> db.website.aggregate({$group:{_id:'$name',total:{$min:'$amount'}}});
+[
+  { _id: 'ash', total: 1000 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'harsh', total: 1000 },
+  { _id: 'rina', total: 3000 }
+]
+
+comp> db.website.aggregate({$group:{_id:'$name',total:{$max:'$amount'}}});
+[
+  { _id: 'ash', total: 4000 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'harsh', total: 1000 },
+  { _id: 'rina', total: 3000 }
+]
+
+comp> db.website.aggregate({$group:{_id:'$name',total:{$first:'$amount'}}});
+[
+  { _id: 'ash', total: 4000 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'harsh', total: 1000 },
+  { _id: 'rina', total: 3000 }
+]
+comp> db.website.aggregate({$group:{_id:'$name',total:{$last:'$amount'}}});
+[
+  { _id: 'ash', total: 1000 },
+  { _id: 'jitesh', total: 2000 },
+  { _id: 'harsh', total: 1000 },
+  { _id: 'rina', total: 3000 }
+]
+comp> db.website.aggregate({$group:{_id:'$name',total:{$push:'$amount'}}});
+[
+  { _id: 'ash', total: [ 4000, 1000 ] },
+  { _id: 'jitesh', total: [ 2000 ] },
+  { _id: 'rina', total: [ 3000 ] },
+  { _id: 'harsh', total: [ 1000 ] }
+]
+comp> db.website.aggregate({$group:{_id:'$name',total:{$sum:1}}});
+[
+  { _id: 'jitesh', total: 1 },
+  { _id: 'rina', total: 1 },
+  { _id: 'ash', total: 2 },
+  { _id: 'harsh', total: 1 }
+]
+comp> db.website.aggregate({$group:{_id:'$name',total:{$addToSet:'$amount'}}});
+[
+  { _id: 'ash', total: [ 1000, 4000 ] },
+  { _id: 'jitesh', total: [ 2000 ] },
+  { _id: 'harsh', total: [ 1000 ] },
+  { _id: 'rina', total: [ 3000 ] }
+]

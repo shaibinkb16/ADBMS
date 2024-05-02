@@ -1,0 +1,61 @@
+SQL> set serveroutput on;
+SQL> CREATE OR REPLACE PROCEDURE welcome_msg(p_name IN VARCHAR2)
+  2  IS
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE('welcome' || p_name);
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> EXEC welcome_msg('Guru99');
+welcomeGuru99
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE OR REPLACE PROCEDURE welcome_msg(p_name IN VARCHAR2, salary out number)
+  2  IS
+  3  BEGIN
+  4  salary:=10000;
+  5  DBMS_OUTPUT.PUT_LINE('Welcome' ||p_name);
+  6  END;
+  7  /
+
+Procedure created.
+
+SQL> var sal number;
+SQL> EXEC welcome_msg('Amrutha',:sal);
+WelcomeAmrutha
+
+PL/SQL procedure successfully completed.
+
+SQL> print sal;
+
+       SAL
+----------
+     10000
+SQL> CREATE OR REPLACE FUNCTION welcome_msg_func(p_name IN VARCHAR2) RETURN VARCHAR2
+  2  IS
+  3  BEGIN
+  4  RETURN('Welcome'||p_name);
+  5  END;
+  6  /
+
+Function created.
+
+SQL> DECLARE
+  2  lv_msg VARCHAR2(250);
+  3  BEGIN
+  4  lv_msg:=welcome_msg_func('Amrutha');
+  5  DBMS_OUTPUT.PUT_LINE(lv_msg);
+  6  END;
+  7  /
+WelcomeAmrutha
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT welcome_msg_func('Amrutha') FROM DUAL;
+
+WELCOME_MSG_FUNC('AMRUTHA')
+--------------------------------------------------------------------------------
+WelcomeAmrutha

@@ -1,0 +1,394 @@
+1)
+
+
+SQL> CREATE TABLE EMP(empno NUMBER(4) PRIMARY KEY, ename VARCHAR2(25), job VARCHAR2(12), salary NUMBER(10,2), commission NUMBER(7,2), deptno NUMBER(2));
+
+Table created.
+
+2)
+
+SQL> DESC EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(25)
+ JOB                                                VARCHAR2(12)
+ SALARY                                             NUMBER(10,2)
+ COMMISSION                                         NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+
+3)
+SQL> INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno);
+Enter value for empno: 100
+Enter value for ename: TOBIN
+Enter value for job: DOCTOR
+Enter value for salary: 15000
+Enter value for commission: 150
+Enter value for deptno: 21
+old   1: INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno)
+new   1: INSERT INTO EMP VALUES(100, 'TOBIN','DOCTOR',15000, 150, 21)
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno);
+Enter value for empno: 101
+Enter value for ename: THOMAS
+Enter value for job: HACKER
+Enter value for salary: 25000
+Enter value for commission: 250
+Enter value for deptno: 25
+old   1: INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno)
+new   1: INSERT INTO EMP VALUES(101, 'THOMAS','HACKER',25000, 250, 25)
+
+1 row created.
+
+
+
+
+SQL> SET LINESIZE 100;
+2)
+SQL> DESC EMP;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ EMPNO                                                 NOT NULL NUMBER(4)
+ ENAME                                                          VARCHAR2(25)
+ JOB                                                            VARCHAR2(12)
+ SALARY                                                         NUMBER(10,2)
+ COMMISSION                                                     NUMBER(7,2)
+ DEPTNO                                                         NUMBER(2)
+
+
+
+
+4)
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY COMMISSION     DEPTNO
+---------- ------------------------- ------------ ---------- ---------- ----------
+       100 TOBIN                     DOCTOR            15000        150         21
+       101 THOMAS                    HACKER            25000        250         25
+
+
+
+
+
+6)
+SQL> UPDATE EMP SET job='analyst' WHERE job='DOCTOR';
+
+1 row updated.
+
+
+
+
+7)
+SQL> ALTER TABLE EMP ADD(date_join DATE);
+
+Table altered.
+
+SQL> UPDATE EMP SET date_join='17-dec-21' WHERE empno=100;
+
+1 row updated.
+
+SQL> UPDATE EMP SET date_join='15-dec-20' WHERE empno=101;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY COMMISSION     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------- ---------
+       100 TOBIN                     analyst           15000        150         21 17-DEC-21
+       101 THOMAS                    HACKER            25000        250         25 15-DEC-20
+
+
+
+
+SQL> INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno, '&date_join');
+Enter value for empno: 102
+Enter value for ename: MANU
+Enter value for job: analyst
+Enter value for salary: 22000
+Enter value for commission: 120
+Enter value for deptno: 24
+Enter value for date_join: 22-JAN-21
+old   1: INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno, '&date_join')
+new   1: INSERT INTO EMP VALUES(102, 'MANU','analyst',22000, 120, 24, '22-JAN-21')
+
+1 row created.
+
+SQL>  INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno, '&date_join');
+Enter value for empno: 103
+Enter value for ename: JERRY
+Enter value for job: ENGINEER
+Enter value for salary: 21000
+Enter value for commission: 160
+Enter value for deptno: 27
+Enter value for date_join: 18-NOV-20
+old   1:  INSERT INTO EMP VALUES(&empno, '&ename','&job',&salary, &commission, &deptno, '&date_join')
+new   1:  INSERT INTO EMP VALUES(103, 'JERRY','ENGINEER',21000, 160, 27, '18-NOV-20')
+
+1 row created.
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY COMMISSION     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------- ---------
+       100 TOBIN                     analyst           15000        150         21 17-DEC-21
+       101 THOMAS                    HACKER            25000        250         25 15-DEC-20
+       102 MANU                      analyst           22000        120         24 22-JAN-21
+       103 JERRY                     ENGINEER          21000        160         27 18-NOV-20
+
+
+
+
+
+8)
+SQL> SELECT DISTINCT job FROM EMP;
+
+JOB
+------------
+HACKER
+analyst
+ENGINEER
+
+
+9)
+SQL> SELECT ename FROM EMP WHERE deptno=21 OR deptno=24;
+
+ENAME
+-------------------------
+TOBIN
+MANU
+
+10)
+SQL> SELECT ename, SUM(salary+commission) FROM EMP GROUP BY ename;
+
+ENAME                     SUM(SALARY+COMMISSION)
+------------------------- ----------------------
+THOMAS                                     25250
+TOBIN                                      15150
+JERRY                                      21160
+MANU                                       22120
+
+
+
+
+
+
+
+16)
+
+SQL> UPDATE EMP SET salary=salary+commission;
+
+4 rows updated.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY COMMISSION     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------- ---------
+       100 TOBIN                     analyst           15150        150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250        250         25 15-DEC-20
+       102 MANU                      analyst           22120        120         24 22-JAN-21
+       103 JERRY                     ENGINEER          21160        160         27 18-NOV-20
+
+
+
+
+SQL> ALTER TABLE EMP DROP(commission);
+
+Table altered.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------
+       100 TOBIN                     analyst           15150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250         25 15-DEC-20
+       102 MANU                      analyst           22120         24 22-JAN-21
+       103 JERRY                     ENGINEER          21160         27 18-NOV-20
+
+
+
+
+
+
+
+
+
+
+
+17)
+
+SQL> UPDATE EMP SET salary=25250 WHERE empno=103;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------
+       100 TOBIN                     analyst           15150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250         25 15-DEC-20
+       102 MANU                      analyst           22120         24 22-JAN-21
+       103 JERRY                     ENGINEER          25250         27 18-NOV-20
+
+SQL> SELECT E1.empname,E2.salary FROM EMP E1, EMP E2 WHERE E1.salary=E2.SALARY AND E1.EMPNAME<>E2.EMPNAME;
+
+EMPNAME                       SALARY
+------------------------- ----------
+JERRY                          25250
+THOMAS                         25250
+
+SQL>
+
+
+
+17)
+
+SQL> UPDATE EMP SET salary=25250 WHERE empno=103;
+
+1 row updated.
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME                     JOB              SALARY     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------
+       100 TOBIN                     analyst           15150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250         25 15-DEC-20
+       102 MANU                      analyst           22120         24 22-JAN-21
+       103 JERRY                     ENGINEER          25250         27 18-NOV-20
+
+SQL> SELECT empname,salary FROM EMP WHERE salary IN(SELECT salary FROM EMP GROUP BY salary HAVING COUNT(*)>1);
+
+EMPNAME                       SALARY
+------------------------- ----------
+JERRY                          25250
+THOMAS                         25250
+
+
+
+18)
+
+SQL> ALTER TABLE EMP RENAME COLUMN ename TO empname;
+
+Table altered.
+
+SQL> ALTER TABLE EMP RENAME COLUMN empno To empid;
+
+Table altered.
+
+SQL> SELECT * FROM EMP;
+
+     EMPID EMPNAME                   JOB              SALARY     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------
+       100 TOBIN                     analyst           15150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250         25 15-DEC-20
+       102 MANU                      analyst           22120         24 22-JAN-21
+       103 JERRY                     ENGINEER          25250         27 18-NOV-20
+
+
+
+
+19)
+
+SQL> ALTER TABLE EMP RENAME TO EMPLOYEE;
+
+Table altered.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+     EMPID EMPNAME                   JOB              SALARY     DEPTNO DATE_JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------
+       100 TOBIN                     analyst           15150         21 17-DEC-21
+       101 THOMAS                    HACKER            25250         25 15-DEC-20
+       102 MANU                      analyst           22120         24 22-JAN-21
+       103 JERRY                     ENGINEER          25250         27 18-NOV-20
+
+
+
+
+
+
+
+
+
+
+question 2
+
+
+2)
+
+SQL> SELECT COUNT(empno) FROM EMP;
+
+COUNT(EMPNO)
+------------
+           4
+
+
+
+3)
+
+SQL> SELECT MAX(salary) FROM EMP;
+
+MAX(SALARY)
+-----------
+      25000
+
+
+
+SQL> SELECT MIN(salary) FROM EMP;
+
+MIN(SALARY)
+-----------
+      15000
+
+SQL> SELECT SUM(salary) FROM EMP;
+
+SUM(SALARY)
+-----------
+      83000
+
+SQL> SELECT AVG(salary) FROM EMP;
+
+AVG(SALARY)
+-----------
+      20750
+SQL> CREATE OR REPLACE VIEW A AS SELECT empno,ename FROM EMP;
+
+View created.
+
+SQL> SELECT * FROM A;
+
+     EMPNO ENAME
+---------- -------------------------
+       100 TOBIN
+       101 THOMAS
+       102 MANU
+       103 JERRY
+SQL> SELECT ename FROM EMP ORDER BY ename;
+
+ENAME
+-------------------------
+JERRY
+MANU
+THOMAS
+TOBIN
+
+SQL> SELECT ename FROM EMP ORDER BY ename DESC;
+
+ENAME
+-------------------------
+TOBIN
+THOMAS
+MANU
+JERRY
+
+SQL> SELECT ename FROM EMP ORDER BY salary;
+
+ENAME
+-------------------------
+TOBIN
+JERRY
+MANU
+THOMAS

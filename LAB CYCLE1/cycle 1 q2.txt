@@ -1,0 +1,124 @@
+SQL> CREATE TABLE EMP(eid NUMBER(4) PRIMARY KEY, ename VARCHAR2(25), age NUMBER(10), salary NUMBER(10));
+
+Table created.
+
+SQL> INSERT INTO EMP VALUES(&eid,'&ename',&age,&salary);
+Enter value for eid: 10
+Enter value for ename: tobin
+Enter value for age: 26
+Enter value for salary: 25000
+old   1: INSERT INTO EMP VALUES(&eid,'&ename',&age,&salary)
+new   1: INSERT INTO EMP VALUES(10,'tobin',26,25000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: 11
+Enter value for ename: joseph
+Enter value for age: 24
+Enter value for salary: 28000
+old   1: INSERT INTO EMP VALUES(&eid,'&ename',&age,&salary)
+new   1: INSERT INTO EMP VALUES(11,'joseph',24,28000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: 12
+Enter value for ename: manu
+Enter value for age: 26
+Enter value for salary: 22000
+old   1: INSERT INTO EMP VALUES(&eid,'&ename',&age,&salary)
+new   1: INSERT INTO EMP VALUES(12,'manu',26,22000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: 13
+Enter value for ename: akshay
+Enter value for age: 22
+Enter value for salary: 35000
+old   1: INSERT INTO EMP VALUES(&eid,'&ename',&age,&salary)
+new   1: INSERT INTO EMP VALUES(13,'akshay',22,35000)
+
+1 row created.
+
+SQL> SELECT COUNT(eid) FROM EMP;
+
+COUNT(EID)
+----------
+         4
+
+SQL> SELECT MAX(age) FROM EMP;
+
+  MAX(AGE)
+----------
+        26
+
+SQL> SELECT MIN(age) FROM EMP;
+
+  MIN(AGE)
+----------
+        22
+
+SQL> SELECT SUM(salary) FROM EMP;
+
+SUM(SALARY)
+-----------
+     110000
+
+SQL> SELECT AVG(salary) FROM EMP;
+
+AVG(SALARY)
+-----------
+      27500
+
+SQL> SELECT AVG(age) FROM EMP;
+
+  AVG(AGE)
+----------
+      24.5
+
+
+SQL> CREATE OR REPLACE VIEW AGEVIEW AS SELECT ename,age FROM EMP;
+
+View created.
+
+SQL> SELECT * FROM AGEVIEW;
+
+ENAME                            AGE
+------------------------- ----------
+tobin                             26
+joseph                            24
+manu                              26
+akshay                            22
+
+SQL> CREATE OR REPLACE VIEW A AS SELECT eid,ename,salary FROM EMP;
+
+View created.
+
+SQL> SELECT * FROM A;
+
+       EID ENAME                         SALARY
+---------- ------------------------- ----------
+        10 tobin                          25000
+        11 joseph                         28000
+        12 manu                           22000
+        13 akshay                         35000
+
+SQL> SELECT ename FROM EMP ORDER BY SALARY DESC;
+
+ENAME
+-------------------------
+akshay
+joseph
+tobin
+manu
+
+SQL> SELECT ename FROM EMP ORDER BY age;
+
+ENAME
+-------------------------
+akshay
+joseph
+manu
+tobin

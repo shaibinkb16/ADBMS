@@ -1,0 +1,364 @@
+Amrutha> db.Student.find({$or:[{Name:'Piyush'},{Rno:2}]}).pretty()
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({$or:[{Name:'Piyush'},{Class:'TE COMP'}]}).pretty()
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+
+
+
+Amrutha> db.Student.find({$nor:[{Name:'Piyush'},{Class:'TE COMP'}]}).pretty();
+
+
+
+Amrutha> db.Student.find({$nor:[{Name:'Piyush'},{Rno:2}]}).pretty()
+[
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({Rno:{$not:{$lt:3}}}).pretty();
+[
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({Rno:{$eq:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+
+Amrutha> db.Student.find({Rno:{$ne:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({Rno:{$gt:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+Amrutha> db.Student.find({Rno:{$gte:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({Rno:{$lt:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+
+
+
+Amrutha> db.Student.find({Rno:{$lte:5}}).pretty();
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+
+Amrutha> db.Student.find({Rno:{$lt:5,$gt:2}}).pretty();
+[
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  }
+]
+
+
+Amrutha> db.Student.find({Rno:{$lte:5,$gte:2}}).pretty();
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.find({Rno:{$lte:5,$gt:2}}).pretty();
+[
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+Amrutha> db.Student.find({Rno:{$lt:5,$gte:2}}).pretty();
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  }
+]

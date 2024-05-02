@@ -1,0 +1,111 @@
+SQL> create table course(course_id varchar(5) primary key,course_desc varchar(10),duration varchar(10),course_fees number(6));
+
+Table created.
+
+SQL> create table student(rollno number(2),name varchar(20),date_of_birth date,course_id varchar(5) references course(course_id),city varchar(20),fees_paid number(5),marks number(3));
+
+Table created.
+
+SQL> insert into course values('co1','bca','3year',100000);
+
+1 row created.
+
+SQL> insert into course values('co2','bba','3year',50000);
+
+1 row created.
+
+SQL> insert into course values('co3','mca','2year',200000);
+
+1 row created.
+
+SQL> insert into course values('co4','bcom','3year',80000);
+
+1 row created.
+
+SQL> insert into course values('co5','btech','4year',300000);
+
+1 row created.
+
+SQL> insert into student values(01,'ammu','15-aug-87','co1','pala',10000,75);
+
+1 row created.
+
+SQL> insert into student values(02,'anu','16-dec-86','co2','pala',5000,60);
+
+1 row created.
+
+SQL> insert into student values(03,'manu','15-aug-87','co3','kottayam',20000,45);
+
+1 row created.
+
+SQL> insert into student values(04,'vinu','12-dec-99','co4','idukki',15000,55);
+
+1 row created.
+
+SQL> insert into student values(05,'maya','11-jan-91','co5','kottayam',0,35);
+
+1 row created.
+
+SQL> select * from student;
+
+    ROLLNO NAME                 DATE_OF_B COURS CITY                  FEES_PAID      MARKS
+---------- -------------------- --------- ----- -------------------- ---------- ----------
+         1 ammu                 15-AUG-87 co1   pala                      10000         75
+         2 anu                  16-DEC-86 co2   pala                       5000         60
+         3 manu                 15-AUG-87 co3   kottayam                  20000         45
+         4 vinu                 12-DEC-99 co4   idukki                    15000         55
+         5 maya                 11-JAN-91 co5   kottayam                      0         35
+
+SQL> select * from course;
+
+COURS COURSE_DES DURATION   COURSE_FEES
+----- ---------- ---------- -----------
+co1   bca        3year           100000
+co2   bba        3year            50000
+co3   mca        2year           200000
+co4   bcom       3year            80000
+co5   btech      4year           300000
+
+
+SQL> select * from student where date_of_birth ='15-AUG-87';
+
+    ROLLNO NAME                 DATE_OF_B COURS CITY                  FEES_PAID      MARKS
+---------- -------------------- --------- ----- -------------------- ---------- ----------
+         1 ammu                 15-AUG-87 co1   pala                      10000         75
+         3 manu                 15-AUG-87 co3   kottayam                  20000         45
+
+
+SQL> select * from student where fees_paid=0 AND marks<50;
+
+    ROLLNO NAME                 DATE_OF_B COURS CITY                  FEES_PAID      MARKS
+---------- -------------------- --------- ----- -------------------- ---------- ----------
+         5 maya                 11-JAN-91 co5   kottayam                      0         35
+
+
+SQL> select city,count(city)from student group by city;
+
+CITY                 COUNT(CITY)
+-------------------- -----------
+kottayam                       2
+pala                           2
+idukki                         1
+
+SQL> select sum(fees_paid)as total_fees from student;
+
+TOTAL_FEES
+----------
+     50000
+
+
+SQL> SET SERVEROUTPUT ON;
+SQL> declare
+  2  name student.name%type;
+  3  marks student.marks%type;
+  4  begin
+  5  select name,marks into name,marks from student where marks=(select max(marks)from student);
+  6  dbms_output.put_line('name'||name||'marks'||marks);
+  7  end;
+  8  /
+nameammumarks75
+
+PL/SQL procedure successfully completed.

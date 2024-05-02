@@ -1,0 +1,86 @@
+SQL> create table stud_file(sid number,name varchar(20), m1 number, m2 number);
+
+Table created.
+
+SQL> insert into stud_file values(1,'anu',40,45);
+
+1 row created.
+
+SQL> insert into stud_file values(2,'binu',48,45);
+
+1 row created.
+
+SQL> insert into stud_file values(3,'cini',30,45);
+
+1 row created.
+
+SQL> insert into stud_file values(4,'dini',30,25);
+
+1 row created.
+
+SQL> declare
+  2  id constant number:=1;
+  3  sname stud_file.name%type;
+  4  mark1 stud_file.m1%type;
+  5  mark2 stud_file.m2%type;
+  6  total number:=0;
+  7  begin
+  8  select name, m1, m2 into sname,mark1,mark2 from stud_file where sid=id;
+  9  total:=mark1+mark2;
+ 10  dbms_output.put_line('Total marks of student '||sname||' with id '||id||' is:'||total);
+ 11  end;
+ 12  /
+Total marks of student anu with id 1 is:85
+
+PL/SQL procedure successfully completed.
+
+
+SQL> declare
+  2  cursor stud_cursor is select * from stud_file;
+  3  stud_rec stud_cursor%rowtype;
+  4  total number:=0;
+  5  begin
+  6  open stud_cursor;
+  7  loop
+  8  fetch stud_cursor into stud_rec;
+  9  exit when stud_cursor%notfound;
+ 10  total:=stud_rec.m1+stud_rec.m2;
+ 11  dbms_output.put_line('Total marks of student '||stud_rec.name ||' is:' || total);
+ 12  end loop;
+ 13  end;
+ 14  /
+Total marks of student anu is:85
+Total marks of student binu is:93
+Total marks of student cini is:75
+Total marks of student dini is:55
+
+PL/SQL procedure successfully completed.
+
+
+SQL> create table stud_mark(sid number, total number);
+
+Table created.
+
+SQL> create or replace trigger stud_trig after insert on stud_file
+  2  for each row
+  3  declare
+  4  tot number:= 0;
+  5  begin
+  6  tot:=:new.m1+:new.m2;
+  7  insert into stud_mark values(:new.sid,tot);
+  8  dbms_output.put_line('AFTER INSERT trigger activated:');
+  9  end;
+ 10  /
+
+Trigger created.
+
+SQL> insert into stud_file values(5,'rani',40,45);
+AFTER INSERT trigger activated:
+
+1 row created.
+
+SQL> select * from stud_mark;
+
+       SID      TOTAL
+---------- ----------
+         5         85
