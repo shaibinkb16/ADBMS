@@ -1,0 +1,129 @@
+test> use demo
+switched to db demo
+demo> db.createCollection('student');
+{ ok: 1 }
+demo> db.student.insertOne({Rno:1,'Name':'amrutha','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262aa91a0b8bfb399f990a')
+}
+demo> db.student.insertOne({Rno:2,'Name':'anakha','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262b4e1a0b8bfb399f990b')
+}
+demo> db.student.insertOne({Rno:3,'Name':'sherin','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262b601a0b8bfb399f990c')
+}
+demo> db.student.insertOne({Rno:4,'Name':'prathibha','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262b771a0b8bfb399f990d')
+}
+demo> db.student.insertOne({Rno:5,'Name':'judith','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262b8d1a0b8bfb399f990e')
+}
+demo> db.student.insertOne({Rno:6,'Name':'teena','Class':'TECOMP'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262ba01a0b8bfb399f990f')
+}
+demo> db.student.find().pretty();
+[
+  {
+    _id: ObjectId('66262aa91a0b8bfb399f990a'),
+    Rno: 1,
+    Name: 'amrutha',
+    Class: 'TECOMP'
+  },
+  {
+    _id: ObjectId('66262b4e1a0b8bfb399f990b'),
+    Rno: 2,
+    Name: 'anakha',
+    Class: 'TECOMP'
+  },
+  {
+    _id: ObjectId('66262b601a0b8bfb399f990c'),
+    Rno: 3,
+    Name: 'sherin',
+    Class: 'TECOMP'
+  },
+  {
+    _id: ObjectId('66262b771a0b8bfb399f990d'),
+    Rno: 4,
+    Name: 'prathibha',
+    Class: 'TECOMP'
+  },
+  {
+    _id: ObjectId('66262b8d1a0b8bfb399f990e'),
+    Rno: 5,
+    Name: 'judith',
+    Class: 'TECOMP'
+  },
+  {
+    _id: ObjectId('66262ba01a0b8bfb399f990f'),
+    Rno: 6,
+    Name: 'teena',
+    Class: 'TECOMP'
+  }
+]
+
+
+
+demo> db.createCollection('employee');
+{ ok: 1 }
+demo> db.employee.insertOne({eid:107,'ename':'anite','address':'cff','gender':'f'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262d631a0b8bfb399f9910')
+}
+demo> db.employee.insertOne({eid:108,'ename':'anna','address':'cdf','gender':'f'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262d7c1a0b8bfb399f9911')
+}
+demo> db.employee.insertOne({eid:109,'ename':'bharathy','address':'cff','gender':'f'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262d9c1a0b8bfb399f9912')
+}
+demo> db.employee.insertOne({eid:110,'ename':'amrutha','address':'cff','gender':'f'});
+{
+  acknowledged: true,
+  insertedId: ObjectId('66262db51a0b8bfb399f9913')
+}
+demo> db.employee.find();
+[
+  {
+    _id: ObjectId('66262d631a0b8bfb399f9910'),
+    eid: 107,
+    ename: 'anite',
+    address: 'cff',
+    gender: 'f'
+  },
+  {
+    _id: ObjectId('66262d7c1a0b8bfb399f9911'),
+    eid: 108,
+    ename: 'anna',
+    address: 'cdf',
+    gender: 'f'
+  },
+  {
+    _id: ObjectId('66262d9c1a0b8bfb399f9912'),
+    eid: 109,
+    ename: 'bharathy',
+    address: 'cff',
+    gender: 'f'
+  },
+  {
+    _id: ObjectId('66262db51a0b8bfb399f9913'),
+    eid: 110,
+    ename: 'amrutha',
+    address: 'cff',
+    gender: 'f'
+  }
+]

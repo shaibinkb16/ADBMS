@@ -1,0 +1,362 @@
+SQL> CREATE TABLE SAILORS(sid NUMBER(10) PRIMARY KEY, sname VARCHAR2(25),rating NUMBER(10,2),age NUMBER(2));
+
+Table created.
+
+
+
+
+SQL> CREATE TABLE BOATS(bid NUMBER(10) PRIMARY KEY, bname VARCHAR2(25),color VARCHAR2(25));
+
+Table created.
+
+
+
+
+SQL> CREATE TABLE RESERVES(sid INT REFERENCES SAILORS(sid), bid INT REFERENCES BOATS(bid),day DATE);
+
+Table created.
+
+SQL> INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age);
+Enter value for sid: 22
+Enter value for sname: Dustin
+Enter value for rating: 7
+Enter value for age: 45
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(22,'Dustin',7,45)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 29
+Enter value for sname: Brutas
+Enter value for rating: 1
+Enter value for age: 33
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(29,'Brutas',1,33)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 31
+Enter value for sname: Lubber
+Enter value for rating: 8
+Enter value for age: 55
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(31,'Lubber',8,55)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 32
+Enter value for sname: Andy
+Enter value for rating: 8
+Enter value for age: 25
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(32,'Andy',8,25)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 58
+Enter value for sname: Rusty
+Enter value for rating: 10
+Enter value for age: 35
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(58,'Rusty',10,35)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 64
+Enter value for sname: Horatio
+Enter value for rating: 7
+Enter value for age: 35
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(64,'Horatio',7,35)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 71
+Enter value for sname: Zorba
+Enter value for rating: 10
+Enter value for age: 16
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(71,'Zorba',10,16)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 74
+Enter value for sname: Horatio
+Enter value for rating: 9
+Enter value for age: 35
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(74,'Horatio',9,35)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 85
+Enter value for sname: Art
+Enter value for rating: 3
+Enter value for age: 26
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(85,'Art',3,26)
+
+1 row created.
+
+SQL> /
+Enter value for sid: 95
+Enter value for sname: Bob
+Enter value for rating: 3
+Enter value for age: 64
+old   1: INSERT INTO SAILORS VALUES(&sid,'&sname',&rating,&age)
+new   1: INSERT INTO SAILORS VALUES(95,'Bob',3,64)
+
+1 row created.
+
+
+SQL> SELECT * FROM SAILORS;
+
+       SID SNAME                         RATING        AGE
+---------- ------------------------- ---------- ----------
+        22 Dustin                             7         45
+        29 Brutas                             1         33
+        31 Lubber                             8         55
+        32 Andy                               8         25
+        58 Rusty                             10         35
+        64 Horatio                            7         35
+        71 Zorba                             10         16
+        74 Horatio                            9         35
+        85 Art                                3         26
+        95 Bob                                3         64
+
+10 rows selected.
+
+
+SQL> INSERT INTO BOATS VALUES(&bid,'&bname','&color');
+Enter value for bid: 101
+Enter value for bname: Interlake
+Enter value for color: Blue
+old   1: INSERT INTO BOATS VALUES(&bid,'&bname','&color')
+new   1: INSERT INTO BOATS VALUES(101,'Interlake','Blue')
+
+1 row created.
+
+SQL> /
+Enter value for bid: 102
+Enter value for bname: Interlake
+Enter value for color: Red
+old   1: INSERT INTO BOATS VALUES(&bid,'&bname','&color')
+new   1: INSERT INTO BOATS VALUES(102,'Interlake','Red')
+
+1 row created.
+
+SQL> /
+Enter value for bid: 103
+Enter value for bname: Clipper
+Enter value for color: Green
+old   1: INSERT INTO BOATS VALUES(&bid,'&bname','&color')
+new   1: INSERT INTO BOATS VALUES(103,'Clipper','Green')
+
+1 row created.
+
+SQL> /
+Enter value for bid: 104
+Enter value for bname: Marine
+Enter value for color: Red
+old   1: INSERT INTO BOATS VALUES(&bid,'&bname','&color')
+new   1: INSERT INTO BOATS VALUES(104,'Marine','Red')
+
+1 row created.
+
+
+
+
+SQL> SELECT * FROM BOATS;
+
+       BID BNAME                     COLOR
+---------- ------------------------- -------------------------
+       101 Interlake                 Blue
+       102 Interlake                 Red
+       103 Clipper                   Green
+       104 Marine                    Red
+
+
+
+
+
+
+
+SQL> INSERT INTO RESERVES VALUES(&sid,&bid,&day);
+Enter value for sid: 22
+Enter value for bid: 101
+Enter value for day: '10-OCT-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(22,101,'10-OCT-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 22
+Enter value for bid: 102
+Enter value for day: '10-OCT-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(22,102,'10-OCT-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 22
+Enter value for bid: 103
+Enter value for day: '10-AUG-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(22,103,'10-AUG-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 22
+Enter value for bid: 104
+Enter value for day: '10-JULY-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(22,104,'10-JULY-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 31
+Enter value for bid: 102
+Enter value for day: '11-OCT-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(31,102,'11-OCT-98')
+
+1 row created.
+
+SQL> INSERT INTO RESERVES VALUES(&sid,&bid,&day);
+Enter value for sid: 31
+Enter value for bid: 103
+Enter value for day: '11-JUN-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(31,103,'11-JUN-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 31
+Enter value for bid: 104
+Enter value for day: '11-DEC-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(31,104,'11-DEC-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 64
+Enter value for bid: 101
+Enter value for day: '9-MAY-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(64,101,'9-MAY-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 64
+Enter value for bid: 102
+Enter value for day: '9-AUG-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(64,102,'9-AUG-98')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 74
+Enter value for bid: 103
+Enter value for day: '9-AUG-98'
+old   1: INSERT INTO RESERVES VALUES(&sid,&bid,&day)
+new   1: INSERT INTO RESERVES VALUES(74,103,'9-AUG-98')
+
+1 row created.
+
+SQL> SELECT * FROM RESERVES;
+
+       SID        BID DAY
+---------- ---------- ---------
+        22        101 10-OCT-98
+        22        102 10-OCT-98
+        22        103 10-AUG-98
+        22        104 10-JUL-98
+        31        102 11-OCT-98
+        31        103 11-JUN-98
+        31        104 11-DEC-98
+        64        101 09-MAY-98
+        64        102 09-AUG-98
+        74        103 09-AUG-98
+
+10 rows selected.
+
+SQL>
+
+
+
+
+
+ANSWERS
+
+
+
+SQL> SELECT sname, age FROM SAILORS;
+
+SNAME                            AGE
+------------------------- ----------
+Dustin                            45
+Brutas                            33
+Lubber                            55
+Andy                              25
+Rusty                             35
+Horatio                           35
+Zorba                             16
+Horatio                           35
+Art                               26
+Bob                               64
+
+10 rows selected.
+
+SQL> SELECT * FROM SAILORS WHERE sid IN (SELECT sid FROM RESERVES WHERE bid=101);
+
+       SID SNAME                         RATING        AGE
+---------- ------------------------- ---------- ----------
+        22 Dustin                             7         45
+        64 Horatio                            7         35
+
+SQL> SELECT * FROM SAILORS WHERE rating>7;
+
+       SID SNAME                         RATING        AGE
+---------- ------------------------- ---------- ----------
+        31 Lubber                             8         55
+        32 Andy                               8         25
+        58 Rusty                             10         35
+        71 Zorba                             10         16
+        74 Horatio                            9         35
+
+SQL> SELECT sname FROM SAILORS WHERE sid IN (SELECT sid FROM RESERVES WHERE bid=103);
+
+SNAME
+-------------------------
+Dustin
+Lubber
+Horatio
+
+SQL> SELECT SAILORS.sname FROM SAILORS JOIN RESERVES ON SAILORS.sid=RESERVES.SID join BOATS ON RESERVES.bid=BOATS.bid WHERE BOATS.color='Red' ORDER BY SAILORS.age;
+
+SNAME
+-------------------------
+Horatio
+Dustin
+Dustin
+Lubber
+Lubber
+
+
+

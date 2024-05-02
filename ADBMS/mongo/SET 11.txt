@@ -1,0 +1,272 @@
+test> use Amrutha
+switched to db Amrutha
+Amrutha> db.createCollection('Student');
+{ ok: 1 }
+
+
+
+
+Amrutha> db.Student.insertOne({Rno:1,Name:'Piyush',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf44503bb929f8e9f990f')
+}
+Amrutha> db.Student.insertOne({Rno:2,Name:'Abhi',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf45403bb929f8e9f9910')
+}
+Amrutha> db.Student.insertOne({Rno:3,Name:'Ashley',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf46903bb929f8e9f9911')
+}
+Amrutha> db.Student.insertOne({Rno:4,Name:'Hitesh',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf47e03bb929f8e9f9912')
+}
+Amrutha> db.Student.insertOne({Rno:5,Name:'Pratik',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf49c03bb929f8e9f9913')
+}
+Amrutha> db.Student.insertOne({Rno:6,Name:'Pratik',Class:'TE COMP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf4af03bb929f8e9f9914')
+}
+
+
+Amrutha> db.Student.find()
+[
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Hitesh',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.find().pretty()
+[
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Hitesh',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+
+Amrutha> db.Student.updateOne({Name:'Hitesh'},{$set:{Name:'Henry'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Amrutha> db.Student.find().pretty()
+[
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+
+Amrutha> db.Student.deleteOne({Rno:1})
+{ acknowledged: true, deletedCount: 0 }
+Amrutha> db.Student.find().pretty()
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  }
+]
+
+
+
+Amrutha> db.Student.insertOne({_id: ObjectId('661cf44503bb929f8e9f990f'),Rno:1,Name:'Piyush',Class:'TE COMP',ADD:'MP'})
+{
+  acknowledged: true,
+  insertedId: ObjectId('661cf44503bb929f8e9f990f')
+}
+Amrutha> db.Student.find().pretty()
+[
+  {
+    _id: ObjectId('661cf45403bb929f8e9f9910'),
+    Rno: 2,
+    Name: 'Abhi',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf46903bb929f8e9f9911'),
+    Rno: 3,
+    Name: 'Ashley',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf47e03bb929f8e9f9912'),
+    Rno: 4,
+    Name: 'Henry',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf49c03bb929f8e9f9913'),
+    Rno: 5,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf4af03bb929f8e9f9914'),
+    Rno: 6,
+    Name: 'Pratik',
+    Class: 'TE COMP'
+  },
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
+
+Amrutha> db.Student.find({$and:[{Name:'Piyush'},{Rno:2}]}).pretty()
+
+Amrutha> db.Student.find({$and:[{Name:'Piyush'},{Rno:1}]}).pretty()
+[
+  {
+    _id: ObjectId('661cf44503bb929f8e9f990f'),
+    Rno: 1,
+    Name: 'Piyush',
+    Class: 'TE COMP',
+    ADD: 'MP'
+  }
+]
